@@ -126,7 +126,7 @@ class Book(models.Model):
     )
     authors = models.ManyToManyField(
         Author,
-        blank=True, null=True,
+        blank=True,
         related_name='books',
         verbose_name='Authors',
     )

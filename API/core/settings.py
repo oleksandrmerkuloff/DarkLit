@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'darklit.apps.DarklitConfig',
+    'users.apps.UsersConfig',
 
 ]
 
@@ -110,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'core.DarkLitUser'
+AUTH_USER_MODEL = 'users.DarkLitUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -127,9 +128,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static'
+# ]
 
 STATIC_URL = 'static/'
 

@@ -68,7 +68,6 @@ class DarkLitUser(AbstractBaseUser, PermissionsMixin):
         blank=True,
         null=True
     )
-    joined_date = models.DateTimeField(auto_now_add=True)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
