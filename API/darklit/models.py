@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.utils.text import slugify
 from django.urls import reverse
 
@@ -14,7 +15,7 @@ class Language(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     class Meta:
         ordering = ['name']
         verbose_name = 'Language'
@@ -32,7 +33,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     class Meta:
         ordering = ['name']
         verbose_name = 'Tag'
@@ -50,7 +51,7 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     class Meta:
         ordering = ['name']
         verbose_name = 'Country'
@@ -105,6 +106,13 @@ class Book(models.Model):
     )
     slug = models.SlugField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name='Upload author',
+        related_name='books',
+        on_delete=models.CASCADE,
+        blank=False, null=False
+    )
     language = models.ForeignKey(
         Language,
         blank=True, null=True,
@@ -128,11 +136,11 @@ class Book(models.Model):
         if authors:
             return f'{self.title} by {authors}'
         return self.title
-    
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
-    
+
     def get_absolute_url(self):
         return reverse('book_detail', kwargs={'slug': self.slug})
 
